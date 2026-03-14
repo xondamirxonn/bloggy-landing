@@ -123,7 +123,7 @@ export default function EditorPage() {
                 <div className="space-y-4 mb-12 group">
                     <textarea
                         placeholder="Article Title..."
-                        className="w-full text-5xl font-black border-none focus:ring-0 placeholder:text-zinc-200 resize-none h-auto p-0 overflow-hidden leading-tight italic bg-transparent focus:outline-none"
+                        className="w-full text-5xl font-bold border-none focus:ring-0 placeholder:text-zinc-200 resize-none h-auto p-0 overflow-hidden leading-tight bg-transparent focus:outline-none"
                         rows={1}
                         onInput={(e) => {
                             e.currentTarget.style.height = 'auto';

@@ -37,7 +37,7 @@ export default function ArticleDetailPage() {
             <article className="pt-32 pb-20 max-w-3xl mx-auto px-6">
                 {/* Title & Metadata */}
                 <header className="space-y-8 mb-16">
-                    <h1 className="text-4xl md:text-6xl font-black text-black leading-tight italic tracking-tight">
+                    <h1 className="text-4xl md:text-6xl font-bold text-black leading-tight tracking-tight">
                         The Future of Frontend: Why Micro-Interactions Are the New Standard
                     </h1>
 
@@ -69,8 +69,8 @@ export default function ArticleDetailPage() {
                 </header>
 
                 {/* Content Section Placeholder */}
-                <div className="prose prose-zinc prose-lg lg:prose-xl max-w-none prose-p:leading-relaxed prose-p:text-zinc-700 prose-headings:font-black prose-headings:italic prose-a:text-black prose-a:font-bold prose-blockquote:border-black prose-blockquote:font-serif prose-blockquote:italic">
-                    <p className="text-2xl font-medium text-zinc-500 italic mb-10 leading-snug">
+                <div className="prose prose-zinc prose-lg lg:prose-xl max-w-none prose-p:leading-relaxed prose-p:text-zinc-700 prose-headings:font-bold prose-a:text-black prose-a:font-bold prose-blockquote:border-black prose-blockquote:font-serif">
+                    <p className="text-2xl font-medium text-zinc-500 mb-10 leading-snug">
                         In an era where every pixel counts, the difference between a good product and a great one often lies in the small things.
                     </p>
 

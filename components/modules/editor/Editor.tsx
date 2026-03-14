@@ -77,7 +77,7 @@ const ExtendedImage = ResizeImage.extend({
                     style: `text-align: ${textAlign}`
                 },
                 ['img', imgAttributes],
-                ['figcaption', { class: 'image-caption mt-4 text-center text-sm text-zinc-500 font-medium italic tracking-wide max-w-[90%] mx-auto' }, caption],
+                ['figcaption', { class: 'image-caption mt-4 text-center text-sm text-zinc-500 font-medium tracking-wide max-w-[90%] mx-auto' }, caption],
             ];
         }
 
@@ -457,7 +457,7 @@ export const Editor = ({ content, onChange }: { content?: string, onChange?: (va
             <EditorContent editor={editor} />
 
             {editor && (
-                <div className="fixed bottom-12 left-1/2 -translate-x-1/2 bg-black/90 text-white px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl z-50 flex items-center gap-4 backdrop-blur-xl border border-white/10 opacity-50 hover:opacity-100 transition-all duration-500 scale-90 hover:scale-100 origin-center">
+                <div className="fixed bottom-12 left-1/2 -translate-x-1/2 bg-black/90 text-white px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-2xl z-50 flex items-center gap-4 backdrop-blur-xl border border-white/10 opacity-50 hover:opacity-100 transition-all duration-500 scale-90 hover:scale-100 origin-center">
                     <div className="flex items-center gap-2">
                         <span className="text-zinc-500">Words</span>
                         <span>{editor.storage.characterCount.words()}</span>

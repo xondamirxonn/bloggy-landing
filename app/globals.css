@@ -180,7 +180,6 @@
     float: left;
     height: 0;
     pointer-events: none;
-    font-style: italic;
     font-family: serif;
   }
 
@@ -189,7 +188,7 @@
   }
 
   .tiptap h1 {
-    @apply text-5xl font-black italic mb-8 mt-12 tracking-tight;
+    @apply text-5xl font-bold mb-8 mt-12 tracking-tight;
   }
 
   .tiptap h2 {
@@ -201,7 +200,7 @@
   }
 
   .tiptap blockquote {
-    @apply border-l-4 border-black pl-8 italic text-zinc-500 font-serif my-10 relative py-1;
+    @apply border-l-4 border-black pl-8 text-zinc-500 font-serif my-10 relative py-1;
     background: oklch(0.985 0 0);
   }
 
@@ -259,7 +258,7 @@
   }
 
   .tiptap .image-caption {
-    @apply mt-4 text-center text-sm text-zinc-400 font-medium italic tracking-wide;
+    @apply mt-4 text-center text-sm text-zinc-400 font-medium tracking-wide;
   }
 
   /* Resize Handles */

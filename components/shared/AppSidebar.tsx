@@ -1,6 +1,4 @@
 "use client";
-
-import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -9,14 +7,9 @@ import {
   MessageSquare,
   Bell,
   User,
-  PlusSquare,
-  Settings,
-  LogOut,
   PenLine
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useEditorModal } from "@/providers/EditorProvider";
 import {
   Tooltip,
@@ -24,12 +17,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Image from "next/image";
+import { Button } from "../ui/button";
 
 const navigation = [
   { name: "Feed", href: "/feed", icon: Home },
   { name: "Explore", href: "/explore", icon: Search },
   { name: "Messages", href: "/messages", icon: MessageSquare },
-  { name: "Notifications", href: "/notifications", icon: Bell },
+  // { name: "Notifications", href: "/notifications", icon: Bell },
   { name: "Profile", href: "/profile", icon: User },
 ];
 
@@ -41,9 +36,7 @@ export function AppSidebar() {
     <aside className="fixed left-0 top-0 z-40 h-screen w-20 flex-col border-r bg-white flex items-center py-8 gap-8">
       {/* Logo */}
       <Link href="/feed" className="group">
-        <div className="h-12 w-12 bg-black rounded-2xl flex items-center justify-center text-white transition-all group-hover:rounded-xl">
-          <span className="text-2xl font-bold italic">B</span>
-        </div>
+       <Image src={`/icon.svg`} alt="logo" width={28} height={28} priority />
       </Link>
 
       {/* Main Nav */}
@@ -82,12 +75,12 @@ export function AppSidebar() {
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>
-              <button
+              <Button
+              variant={"ghost"}
                 onClick={() => openEditor()}
-                className="p-3 rounded-2xl bg-black text-white hover:bg-zinc-800 transition-all shadow-lg shadow-zinc-200"
               >
                 <PenLine size={26} strokeWidth={2.5} />
-              </button>
+              </Button>
             </TooltipTrigger>
             <TooltipContent side="right">
               <p>Write Story</p>
@@ -96,26 +89,6 @@ export function AppSidebar() {
         </TooltipProvider>
       </nav>
 
-      {/* Bottom Nav */}
-      <div className="flex flex-col gap-4 items-center">
-        <TooltipProvider delayDuration={0}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-2xl h-12 w-12 text-zinc-500 hover:text-black">
-                <Settings size={24} />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent side="right">
-              <p>Settings</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-
-        <Avatar className="h-12 w-12 border-2 border-transparent hover:border-black transition-all cursor-pointer">
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>AD</AvatarFallback>
-        </Avatar>
-      </div>
     </aside>
   );
 }

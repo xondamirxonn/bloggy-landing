@@ -15,10 +15,10 @@ export default function LoginPage() {
                 <div className="max-w-md w-full mx-auto space-y-10">
                     <div className="space-y-4">
                         <Link href="/" className="inline-block">
-                            <div className="h-10 w-10 bg-black rounded-xl flex items-center justify-center text-white font-black italic">B</div>
+                            <div className="h-10 w-10 bg-black rounded-xl flex items-center justify-center text-white font-bold">B</div>
                         </Link>
-                        <h1 className="text-4xl font-black text-black tracking-tight">Welcome back.</h1>
-                        <p className="text-zinc-500 font-medium italic">Continue your journey in the world of content.</p>
+                        <h1 className="text-4xl font-bold text-black tracking-tight">Welcome back.</h1>
+                        <p className="text-zinc-500 font-medium">Continue your journey in the world of content.</p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
@@ -43,7 +43,7 @@ export default function LoginPage() {
 
                     <form className="space-y-6">
                         <div className="space-y-2">
-                            <label className="text-xs font-black uppercase tracking-widest text-zinc-500 ml-1">Email or Username</label>
+                            <label className="text-xs font-bold uppercase tracking-widest text-zinc-500 ml-1">Email or Username</label>
                             <Input
                                 type="email"
                                 placeholder="alex@bloggy.com"
@@ -52,7 +52,7 @@ export default function LoginPage() {
                         </div>
                         <div className="space-y-2">
                             <div className="flex justify-between items-center px-1">
-                                <label className="text-xs font-black uppercase tracking-widest text-zinc-500">Password</label>
+                                <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">Password</label>
                                 <Link href="#" className="text-xs font-bold text-black underline underline-offset-4">Forgot?</Link>
                             </div>
                             <Input
@@ -68,9 +68,9 @@ export default function LoginPage() {
                         </Button>
                     </form>
 
-                    <p className="text-center text-sm font-medium text-zinc-500 italic">
+                    <p className="text-center text-sm font-medium text-zinc-500">
                         Don't have an account?{" "}
-                        <Link href="/auth/signup" className="text-black font-black not-italic underline underline-offset-4 decoration-2">Create now</Link>
+                        <Link href="/auth/signup" className="text-black font-bold underline underline-offset-4 decoration-2">Create now</Link>
                     </p>
                 </div>
             </div>
@@ -81,13 +81,13 @@ export default function LoginPage() {
                 <div className="absolute bottom-0 left-0 w-64 h-64 bg-zinc-900 rounded-full blur-[100px] opacity-30" />
 
                 <div className="relative z-10 text-white space-y-6">
-                    <h2 className="text-6xl font-black italic leading-tight">
+                    <h2 className="text-6xl font-bold leading-tight">
                         Design is not just what it looks like and feels like. <br />
                         <span className="text-zinc-600">Design is how it works.</span>
                     </h2>
                     <div className="flex items-center gap-4">
                         <div className="h-px w-12 bg-zinc-600" />
-                        <p className="text-sm font-bold uppercase tracking-widest text-zinc-400 italic">Steve Jobs</p>
+                        <p className="text-sm font-bold uppercase tracking-widest text-zinc-400">Steve Jobs</p>
                     </div>
                 </div>
             </div>

@@ -60,11 +60,11 @@ export default function NotificationsPage() {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div className="space-y-1">
-                    <h1 className="text-3xl font-black italic flex items-center gap-3">
+                    <h1 className="text-3xl font-bold flex items-center gap-3">
                         <Bell size={28} className="text-zinc-300" />
                         Activity
                     </h1>
-                    <p className="text-zinc-500 text-sm font-medium italic">You’ve had 12 new interactions today.</p>
+                    <p className="text-zinc-500 text-sm font-medium">You’ve had 12 new interactions today.</p>
                 </div>
                 <div className="flex items-center gap-2">
                     <Button variant="ghost" size="sm" className="text-zinc-400 hover:text-black font-bold uppercase tracking-widest text-[10px] gap-2">
@@ -82,7 +82,7 @@ export default function NotificationsPage() {
                     <button
                         key={tab}
                         className={cn(
-                            "px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all",
+                            "px-6 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all",
                             i === 0 ? "bg-white text-black shadow-sm" : "text-zinc-400 hover:text-black"
                         )}
                     >
@@ -127,7 +127,7 @@ export default function NotificationsPage() {
                         <div className="flex-1 space-y-2">
                             <div className="flex justify-between items-start">
                                 <p className="text-sm leading-relaxed text-zinc-600">
-                                    {notif.user && <span className="text-black font-black italic">{notif.user.name}</span>}
+                                    {notif.user && <span className="text-black font-bold">{notif.user.name}</span>}
                                     {notif.type === 'like' && " liked your article "}
                                     {notif.type === 'follow' && " started following you."}
                                     {notif.type === 'comment' && " commented on "}
@@ -139,7 +139,7 @@ export default function NotificationsPage() {
                             </div>
 
                             {notif.comment && (
-                                <div className="p-4 bg-zinc-50 rounded-2xl border border-zinc-100 text-sm italic text-zinc-500 font-medium">
+                                <div className="p-4 bg-zinc-50 rounded-2xl border border-zinc-100 text-sm text-zinc-500 font-medium">
                                     "{notif.comment}"
                                 </div>
                             )}
@@ -162,7 +162,7 @@ export default function NotificationsPage() {
 
             {/* Suggested Reading (to keep things social) */}
             <div className="pt-8 border-t space-y-6">
-                <h3 className="text-sm font-black uppercase tracking-[0.2em] text-zinc-400">While you're here</h3>
+                <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-zinc-400">While you're here</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="p-6 bg-zinc-50 border border-zinc-100 rounded-[24px] flex items-center gap-4 group cursor-pointer hover:bg-black hover:text-white transition-all">
                         <div className="h-10 w-10 bg-white rounded-xl shadow-sm flex items-center justify-center text-zinc-400 group-hover:bg-zinc-800 group-hover:text-white transition-all">

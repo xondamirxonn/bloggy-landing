@@ -2,21 +2,13 @@
 
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Progress } from "@/components/ui/progress";
 import {
     MapPin,
     Link2,
     Calendar,
-    Settings,
-    Plus,
     Grid,
-    Github,
-    Twitter,
-    Linkedin,
     User,
     Briefcase,
     GraduationCap,
@@ -26,10 +18,23 @@ import {
     Award
 } from "lucide-react";
 import PostCard from "@/components/templates/cards/PostCard";
-import { MOCK_POSTS } from "@/lib/mock-data";
+import { MOCK_POSTS, MOCK_USERS } from "@/lib/mock-data";
 import { FollowListSheet } from "@/components/ui/follow-list-sheet";
+import { FollowButton } from "@/components/ui/follow-button";
+import { useParams, notFound } from "next/navigation";
 
-export default function ProfilePage() {
+export default function UserProfilePage() {
+    const params = useParams();
+    const id = params?.id as string;
+    const user = MOCK_USERS.find((u) => u.id.toString() === id);
+
+    if (!user) {
+        return notFound();
+    }
+
+    // Filter posts for this specific user
+    const userPosts = MOCK_POSTS.filter((post) => post.author.name === user.name);
+
     return (
         <div className="max-w-6xl mx-auto space-y-8">
             {/* Cover and Profile Info Section */}
@@ -43,25 +48,18 @@ export default function ProfilePage() {
                 <div className="px-8 pb-8">
                     <div className="relative flex flex-col md:flex-row md:items-end gap-6 -mt-16 mb-8">
                         <Avatar className="h-32 w-32 border-4 border-white shadow-lg rounded-3xl">
-                            <AvatarImage src="https://i.pravatar.cc/150?u=4" />
-                            <AvatarFallback>AX</AvatarFallback>
+                            <AvatarImage src={user.avatar} />
+                            <AvatarFallback>{user.name[0]}</AvatarFallback>
                         </Avatar>
 
                         <div className="flex-1 space-y-2">
                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                 <div>
-                                    <h1 className="text-3xl font-semibold ">Abdilazizov Xondamir</h1>
-                                    <p className="text-muted-foreground    text-xs">@xondamir • Senior Frontend Developer</p>
+                                    <h1 className="text-3xl font-semibold ">{user.name}</h1>
+                                    <p className="text-muted-foreground text-xs">@{user.name.split(' ').join('').toLowerCase()} • {user.role}</p>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                    <Link href="/profile/edit">
-                                        <Button className="bg-black text-white hover:bg-zinc-800 rounded-xl px-6 font-bold">
-                                            Edit Profile
-                                        </Button>
-                                    </Link>
-                                    <Button variant="outline" size="icon" className="rounded-xl border-zinc-200">
-                                        <Settings size={20} />
-                                    </Button>
+                                    <FollowButton userId={user.id} />
                                 </div>
                             </div>
                         </div>
@@ -70,26 +68,26 @@ export default function ProfilePage() {
                     <div className="grid grid-cols-1 items-end lg:grid-cols-12 gap-12">
                         <div className="lg:col-span-8 space-y-6 text-zinc-700 leading-relaxed font-medium">
                             <p className="text-lg">
-                                Building open-source tools for the modern web. Obsessed with performance, accessibility, and clean codebases. Currently crafting React components at ScaleDesign. Designing the future of content at Bloggy.
+                                Building amazing software with a passion for clean code and great user experiences. Check out my articles on Bloggy, covering everything from UI/UX design to advanced React architectures.
                             </p>
 
-                            <div className="flex flex-wrap gap-4 text-sm text-zinc-500 font-medium  tracking-wider">
+                            <div className="flex flex-wrap gap-4 text-sm text-zinc-500 font-medium tracking-wider">
                                 <div className="flex items-center gap-2">
                                     <MapPin size={16} className="text-zinc-300" />
-                                    Uzbekistan, Tashkent
+                                    Global, Earth
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Link2 size={16} className="text-zinc-300" />
-                                    <a href="#" className="text-blue-500 underline decoration-zinc-200 underline-offset-4">xondamirxon.uz</a>
+                                    <a href="#" className="text-blue-500 underline decoration-zinc-200 underline-offset-4">{user.name.toLowerCase().replace(' ', '')}.com</a>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <Calendar size={16} className="text-zinc-300" />
-                                    Joined March 2026
+                                    Joined February 2026
                                 </div>
                             </div>
 
                             <div className="flex flex-wrap gap-2 pt-2">
-                                {["Frontend", "React", "Next.js", "TypeScript", "UI Design", "Open Source"].map(tag => (
+                                {["Frontend", "React", "Next.js", "Design", "Open Source"].map(tag => (
                                     <Badge key={tag} className="bg-zinc-50 text-zinc-500 border-zinc-100 px-4 py-1.5 rounded-full font-bold text-[10px] uppercase tracking-widest">
                                         {tag}
                                     </Badge>
@@ -98,25 +96,23 @@ export default function ProfilePage() {
                         </div>
 
                         <div className="lg:col-span-4 space-y-6 ">
-
-
                             <div className="flex justify-between px-2 pt-2">
                                 <div className="text-center">
-                                    <div className="text-xl font-bold ">128</div>
+                                    <div className="text-xl font-bold ">{userPosts.length}</div>
                                     <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 leading-none">Posts</div>
                                 </div>
                                 <div className="border-x border-zinc-100 px-8">
-                                    <FollowListSheet type="followers" userId="4">
+                                    <FollowListSheet type="followers" userId={user.id}>
                                         <div className="text-center cursor-pointer hover:bg-zinc-50 p-2 rounded-xl transition-colors">
-                                            <div className="text-xl font-bold ">12.4K</div>
+                                            <div className="text-xl font-bold ">1.2K</div>
                                             <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 leading-none">Followers</div>
                                         </div>
                                     </FollowListSheet>
                                 </div>
                                 <div>
-                                    <FollowListSheet type="following" userId="4">
+                                    <FollowListSheet type="following" userId={user.id}>
                                         <div className="text-center cursor-pointer hover:bg-zinc-50 p-2 rounded-xl transition-colors">
-                                            <div className="text-xl font-bold">842</div>
+                                            <div className="text-xl font-bold">142</div>
                                             <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 leading-none">Following</div>
                                         </div>
                                     </FollowListSheet>
@@ -139,11 +135,17 @@ export default function ProfilePage() {
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value="posts" className="pt-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {MOCK_POSTS.slice(0, 6).map(post => (
-                            <PostCard key={post.id} post={post} />
-                        ))}
-                    </div>
+                    {userPosts.length > 0 ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {userPosts.map(post => (
+                                <PostCard key={post.id} post={post} />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-center py-12 text-zinc-500 font-medium bg-white rounded-3xl border border-zinc-100">
+                            No articles published yet.
+                        </div>
+                    )}
                 </TabsContent>
                 <TabsContent value="about" className="pt-8 space-y-8">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -158,10 +160,7 @@ export default function ProfilePage() {
                                     <h3 className="text-xl font-bold">Summary</h3>
                                 </div>
                                 <p className="text-zinc-600 leading-relaxed">
-                                    Passionate Senior Frontend Developer with over 8 years of experience in building
-                                    high-performance web applications. Expert in React, Next.js, and TypeScript.
-                                    Dedicated to creating intuitive user experiences and maintainable codebases.
-                                    Active contributor to the open-source community and a tech mentor.
+                                    Passionate {user.role} dedicated to creating intuitive user experiences and maintainable codebases. Active contributor to the open-source community.
                                 </p>
                             </section>
 
@@ -176,16 +175,10 @@ export default function ProfilePage() {
                                 <div className="space-y-8">
                                     {[
                                         {
-                                            role: "Senior Frontend Developer",
-                                            company: "ScaleDesign",
+                                            role: user.role,
+                                            company: "Awesome Tech Inc.",
                                             period: "2023 - Present",
-                                            desc: "Leading the frontend team in developing a comprehensive design system and component library."
-                                        },
-                                        {
-                                            role: "Frontend Engineer",
-                                            company: "TechFlow Systems",
-                                            period: "2020 - 2023",
-                                            desc: "Scaled the core platform to support millions of active users while maintaining 99.9% uptime."
+                                            desc: "Leading the team in developing modern web solutions."
                                         }
                                     ].map((exp, idx) => (
                                         <div key={idx} className="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-zinc-100 last:before:hidden">
@@ -196,42 +189,6 @@ export default function ProfilePage() {
                                             </div>
                                             <p className="text-sm font-semibold text-zinc-500 mb-2">{exp.company}</p>
                                             <p className="text-sm text-zinc-600 leading-relaxed">{exp.desc}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </section>
-
-                            {/* Education */}
-                            <section className="bg-white border rounded-3xl p-8 shadow-sm">
-                                <div className="flex items-center gap-3 mb-8">
-                                    <div className="p-2.5 bg-zinc-50 rounded-xl">
-                                        <GraduationCap size={20} className="text-zinc-600" />
-                                    </div>
-                                    <h3 className="text-xl font-bold">Education</h3>
-                                </div>
-                                <div className="space-y-8">
-                                    {[
-                                        {
-                                            degree: "M.S. in Computer Science",
-                                            school: "Tashkent University of Information Technologies",
-                                            period: "2018 - 2020",
-                                            desc: "Specialized in Artificial Intelligence and Web Technologies."
-                                        },
-                                        {
-                                            degree: "B.S. in Software Engineering",
-                                            school: "Inha University in Tashkent",
-                                            period: "2014 - 2018",
-                                            desc: "Graduated with Honors. President of the Web Development Club."
-                                        }
-                                    ].map((edu, idx) => (
-                                        <div key={idx} className="relative pl-8 before:absolute before:left-0 before:top-2 before:bottom-0 before:w-px before:bg-zinc-100 last:before:hidden">
-                                            <div className="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-zinc-500 shadow-[0_0_0_4px_rgba(244,244,245,1)]" />
-                                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
-                                                <h4 className="font-bold text-zinc-900">{edu.degree}</h4>
-                                                <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{edu.period}</span>
-                                            </div>
-                                            <p className="text-sm font-semibold text-zinc-500 mb-2">{edu.school}</p>
-                                            <p className="text-sm text-zinc-600 leading-relaxed">{edu.desc}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -250,10 +207,9 @@ export default function ProfilePage() {
                                 </div>
                                 <ul className="space-y-4">
                                     {[
-                                        "Speaker at JSConf Uzbekistan 2025",
-                                        "Top 1% Contributor on GitHub 2024",
-                                        "Best UI/UX Award 2023",
-                                        "Published Author on Smashing Magazine"
+                                        "Speaker at Tech Conferences",
+                                        "Open Source Contributor",
+                                        "Published Author"
                                     ].map((achievement, idx) => (
                                         <li key={idx} className="flex gap-3 text-sm text-zinc-600 leading-relaxed">
                                             <Award size={16} className="text-zinc-400 shrink-0 mt-0.5" />
@@ -261,36 +217,6 @@ export default function ProfilePage() {
                                         </li>
                                     ))}
                                 </ul>
-                            </section>
-
-                            {/* Languages */}
-                            <section className="bg-white border rounded-3xl p-6 shadow-sm">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <div className="p-2.5 bg-zinc-50 rounded-xl">
-                                        <Languages size={20} className="text-zinc-600" />
-                                    </div>
-                                    <h3 className="text-lg font-bold">Languages</h3>
-                                </div>
-                                <div className="space-y-4">
-                                    {[
-                                        { name: "Uzbek", level: "Native", prof: 100 },
-                                        { name: "English", level: "Fluent (C1)", prof: 90 },
-                                        { name: "Russian", level: "Advanced (B2)", prof: 75 }
-                                    ].map((lang, idx) => (
-                                        <div key={idx} className="space-y-2">
-                                            <div className="flex justify-between text-sm font-bold">
-                                                <span className="text-zinc-700">{lang.name}</span>
-                                                <span className="text-zinc-400 tracking-tighter text-[10px] uppercase">{lang.level}</span>
-                                            </div>
-                                            <div className="h-1.5 w-full bg-zinc-100 rounded-full overflow-hidden">
-                                                <div
-                                                    className="h-full bg-zinc-800 rounded-full"
-                                                    style={{ width: `${lang.prof}%` }}
-                                                />
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
                             </section>
                         </div>
                     </div>

@@ -125,7 +125,7 @@ export default function EditProfilePage() {
                                     defaultValue="Building open-source tools for the modern web. Obsessed with performance, accessibility, and clean codebases. Currently crafting React components at ScaleDesign."
                                     className="bg-zinc-50 border-zinc-100 rounded-2xl focus-visible:ring-black resize-none h-32 p-4"
                                 />
-                                <p className="text-[10px] text-zinc-400 text-right font-medium italic">164 / 280 characters</p>
+                                <p className="text-[10px] text-zinc-400 text-right font-medium">164 / 280 characters</p>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
